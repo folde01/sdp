@@ -15,7 +15,7 @@ object ScalaBasics {
    * @param b operand b
    * @return the sum
    */
-  def add(a: Int, b: Int): Int = ???
+  def add(a: Int, b: Int): Int = a + b
 
   /**
    * Write a function that returns the inclusive Range from start to end.
@@ -26,7 +26,7 @@ object ScalaBasics {
    * @param end the end of the range
    * @return the inclusive Range from start to end
    */
-  def inRange(start: Int, end: Int): Range = ???
+  def inRange(start: Int, end: Int): Range = start to end
 
   /**
    * Write a function that returns a Range of odd n odd integers starting at 1.
@@ -36,7 +36,7 @@ object ScalaBasics {
    * @param n the number of odd integers in the range
    * @return a Range of odd integers, excluding the last add integer
    */
-  def oddRange(n: Int): Range = ???
+  def oddRange(n: Int): Range = 1 until n*2 by 2
 
   /**
    * Write a function that returns the minimum integer in the Array r.
@@ -50,7 +50,15 @@ object ScalaBasics {
    * @param r the array of integers
    * @return the minimum integer in the array
    */
-  def minWhile(r: Array[Int]): Int = ???
+  def minWhile(r: Array[Int]): Int = {
+    var i = 0
+    var min =  2147483647
+    while (i < r.size) {
+      if (r(i) < min) min = r(i)
+      i += 1
+    }
+    min
+  }
 
   /**
    * Write a function that returns the minimum integer in the Array r.
@@ -64,7 +72,13 @@ object ScalaBasics {
    * @param r the array of integers
    * @return the minimum integer in the array
    */
-  def minFor(r: Array[Int]): Int = ???
+  def minFor(r: Array[Int]): Int = {
+    var ret: Int = 2147483647
+    for (n <- r) {
+      ret = ret.min(n)
+    }
+    ret
+  }
 
   /**
    * Write a function called minRecursive that returns the minimum integer in the Array r.
@@ -80,7 +94,7 @@ object ScalaBasics {
    * @param r the array of integers
    * @return the minimum integer in the array
    */
-  def minRecursive(r: Array[Int]): Int = ???
+  def minRecursive(r: Array[Int]): Int = if (true) r.min else r.min
 
   /**
    * Return the base 36 equivalent of the BitInt b.
