@@ -40,6 +40,8 @@ this architecture further.)
 
 
 */
+
+
 import scala.collection.mutable.ListBuffer
 
 class ControlUnit(sl: ListBuffer[Sensor], nl: ListBuffer[Notifier]) {
@@ -48,25 +50,29 @@ class ControlUnit(sl: ListBuffer[Sensor], nl: ListBuffer[Notifier]) {
 
   private var notifiers: ListBuffer[Notifier] = null
 
+
   def ControlUnit(sl: ListBuffer[Sensor], nl: ListBuffer[Notifier]) = {
     sensors = sl
     notifiers = nl
   }
 
-  def runNotifier(notifier: Notifier, sensor: Sensor): Unit =  notifier.notify(sensor)
+  // def runNotifier(notifier: Notifier, sensor: Sensor): Unit =  notifier.notify(sensor)
+
+  def runNotifiers(sensor: Sensor): Unit =
+    for (notifier <- notifiers) notifier.notify(sensor)
 
   def pollSensors() {
+    var notifications = ListBuffer[String]
     for (sensor <- sensors) {
       if (sensor.isTriggered) {
-        // System.out.println("A " + sensor.getSensorType + " sensor was triggered at " + sensor.getLocation)
-        for (notifier <- notifiers) {
-          runNotifier(notifier, sensor)
-        }
+        notifications += "A " + sensor.getSensorType + " sensor was triggered at " + sensor.getLocation
+        runNotifiers(sensor)
       }
       else {
         System.out.println("Polled " + sensor.getSensorType + " at " + sensor.getLocation + " successfully")
       }
     }
+    notifications
   }
 
   def pollSensorsOld() {
