@@ -1,6 +1,8 @@
 import scala.util.Random
 
-class FireSensor extends Sensor with BatteryPowered {
+// have to add BatteryPowered here or we get error on override getBatteryPercentage
+// as we're no longer overriding anything there...
+class SmokeSensor extends Sensor with BatteryPowered {
 
   private var battery = 100
 
@@ -10,11 +12,12 @@ class FireSensor extends Sensor with BatteryPowered {
     location = loc
   }
 
-  override def isTriggered: Boolean = new Random().nextInt(100) > 95
+  override def isTriggered: Boolean = new Random().nextInt(100) > 90
 
   override def getLocation: String = location
 
-  override def getSensorType: String = "fire sensor"
+  override def getSensorType: String = "smoke sensor"
+
 
   override def getBatteryPercentage: Double = {
     if (battery > 0) battery -= 10
