@@ -51,10 +51,12 @@ object ScalaBasics {
     * @return the minimum integer in the array
     */
   def minWhile(r: Array[Int]): Int = {
-    var i = 0
-    var min = 2147483647
-    while (i < r.size) {
-      if (r(i) < min) min = r(i)
+    var min = r(0)
+    var i = 1
+    val sz = r.size
+    while (i < sz) {
+      if (r(i) < min)
+        min = r(i)
       i += 1
     }
     min
