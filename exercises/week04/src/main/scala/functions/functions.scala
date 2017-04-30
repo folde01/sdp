@@ -1,5 +1,6 @@
 package functions
 
+
 object Funcs {
 
   // FUNCTIONAL BASICS:
