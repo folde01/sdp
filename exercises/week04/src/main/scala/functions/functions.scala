@@ -125,7 +125,8 @@ object Funcs {
 
   def length[A](ls: List[A]): Int = foldLeft[A, Int](ls, 0)((acc, _) => acc + 1)
 
-  def reverse[A](ls: List[A]): List[A] = ???  // wtf?
+  def reverse[A](ls: List[A]): List[A] =  
+    foldLeft[A, List[A]](ls, Nil)((acc: List[A], h: A) => acc ::: List(h)) 
 
   def flatten[A](ls: List[List[A]]): List[A] = 
     foldLeft[List[A], List[A]](ls, Nil)((acc: List[A], hl: List[A]) => hl ::: acc) 
