@@ -142,7 +142,11 @@ object Funcs {
     * @param f  : A => B the function to be applied to each element of the input.
     * @return the resulting list from applying f to each element of ls.
     */
-  def map[A, B](ls: List[A])(f: A => B): List[B] = ???
+  def map[A, B](ls: List[A])(f: A => B): List[B] = ls match { 
+    case Nil => Nil
+    case h :: t => f(h) :: map(t)(f)
+  }
+  
 
   /**
     * filter removes all elements from a list for which a given predicate
@@ -153,7 +157,13 @@ object Funcs {
     * @param f  : A => Boolean the predicate
     * @return the filtered list.
     */
-  def filter[A](ls: List[A])(f: A => Boolean): List[A] = ???
+  def filter[A](ls: List[A])(f: A => Boolean): List[A] = ls match { 
+    case Nil => Nil
+    case h :: t => f(h) match { 
+      case true => h :: filter(t)(f)
+      case false => filter(t)(f)
+    }
+  }
 
   /**
     * flatMap is very similar to map. However, the function returns a List,
